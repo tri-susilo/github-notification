@@ -1,0 +1,23 @@
+# File & Folder yang tidak perlu masuk ke image
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.env
+.env.*
+*.log
+tests/
+test/
+.git/
+.gitignore
+docker-compose.yml
+Dockerfile
+README.md
+.idea/
+.vscode/
+*.md
+*.bak
+*.swp
+*.DS_Store
