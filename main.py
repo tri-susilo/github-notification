@@ -34,12 +34,37 @@ async def github_webhook(request: Request, x_github_event: str = Header(None)):
     payload = await request.json()
 
     if x_github_event == "push":
-        repo = payload["repository"]["full_name"]
-        pusher = payload["pusher"]["name"]
-        commits = payload.get("commits", [])
-        commit_messages = "\n".join([f"- [{c['id'][:7]}]({c['url']}) {c['message']}" for c in commits])
-        message = f"?? *Push Event* on `{repo}` by *{pusher}*\n{commit_messages}"
-        await send_telegram_message(message)
+       repo = payload.get("repository", {}).get("full_name", "Unknown Repo")
+       pusher = payload.get("pusher", {}).get("name", "Unknown User")
+       commits = payload.get("commits", [])
+       branch = payload.get("ref", "").split("/")[-1] or "unknown-branch"
+
+       commit_count = len(commits)
+       commit_messages = "\n".join([
+           f"- [`{c.get('id', '')[:7]}`]({c.get('url', '')}) {c.get('message', '').strip()}"
+           for c in commits
+       ]) or "- Tidak ada commit terdeteksi"
+
+       # Ambil waktu dari commit terakhir, fallback ke kosong
+       push_time = ""
+       if commits:
+           push_time = commits[-1].get("timestamp", "").replace("T", " ").replace("Z", " UTC")
+
+       message = (
+           f"🚀 *Push ke* `{repo}`\n"
+           f"🔀 *Branch:* `{branch}`\n"
+           f"👤 Oleh: *{pusher}*\n"
+       )
+       if push_time:
+           message += f"🕒 *Waktu:* {push_time}\n"
+
+       message += (
+           f"\n*Total Commit:* {commit_count}\n\n"
+           f"🔧 Commit Details:\n"
+           f"{commit_messages}"
+       )
+
+       await send_telegram_message(message)
 
     elif x_github_event == "pull_request":
         pr = payload["pull_request"]
