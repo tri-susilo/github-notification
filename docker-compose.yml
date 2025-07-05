@@ -1,0 +1,9 @@
+services:
+  webhook:
+    image: github-telegram-webhook:latest  # built locally, or you can use a remote registry
+    container_name: webhook-bot
+    ports:
+      - "8080:8000"
+    env_file:
+      - .env
+    restart: unless-stopped
