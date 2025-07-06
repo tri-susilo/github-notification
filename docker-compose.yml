@@ -1,9 +1,9 @@
 services:
-  webhook:
-    image: tele-notif:latest # built locally, or you can use a remote registry
+  webhook-bot:
+    image: ghcr.io/tri-susilo/tele-notif:latest  
     container_name: webhook-bot
+    restart: unless-stopped
     ports:
       - "8000:8000"
     env_file:
-      - .env
-    restart: unless-stopped
+      - .env  
