@@ -3,8 +3,8 @@ import hashlib
 from fastapi import FastAPI, Request, Header, HTTPException
 from dotenv import load_dotenv
 import os
-from events import push
-from utils.telegram import send_telegram_message
+from app.events import push
+from app.utils.telegram import send_telegram_message
 
 load_dotenv(override=True)
 
@@ -25,9 +25,6 @@ def verify_github_signature(secret, body: bytes, signature: str) -> bool:
 
     mac = hmac.new(secret.encode(), msg=body, digestmod=hashlib.sha256)
     expected_signature = mac.hexdigest()
-
-    print(f"Expected signature: sha256={expected_signature}")
-    print(f"Received signature: {signature}")
 
     return hmac.compare_digest(expected_signature, received_signature)
 
