@@ -29,13 +29,10 @@ def verify_github_signature(secret, body: bytes, signature: str) -> bool:
     return hmac.compare_digest(expected_signature, received_signature)
 
 
-
 @app.post("/github-webhook")
 async def github_webhook(request: Request, x_github_event: str = Header(None), x_hub_signature_256: str = Header(None)):
+    
     body = await request.body()
-    print("Body diterima:", body.decode())
-    print("Signature header:", x_hub_signature_256)
-
     if not verify_github_signature(GITHUB_WEBHOOK_SECRET, body, x_hub_signature_256):
         raise HTTPException(status_code=403, detail="Invalid signature")
 
