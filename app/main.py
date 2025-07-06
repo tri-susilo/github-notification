@@ -3,8 +3,8 @@ import hashlib
 from fastapi import FastAPI, Request, Header, HTTPException
 from dotenv import load_dotenv
 import os
-from app.events import push
-from app.utils.telegram import send_telegram_message
+from events import push
+from utils.telegram import send_telegram_message
 
 load_dotenv(override=True)
 

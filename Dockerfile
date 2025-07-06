@@ -21,9 +21,9 @@ WORKDIR /app
 COPY --from=builder /install /usr/local
 
 # Copy seluruh source code
-COPY app/ ./app
+COPY app/ .
 
 EXPOSE 8000
 
 # Jalankan FastAPI dari folder app/
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

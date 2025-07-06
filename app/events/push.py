@@ -1,4 +1,4 @@
-from app.utils.telegram import send_telegram_message
+from utils.telegram import send_telegram_message
 
 async def handle_push(payload):
     repo = payload.get("repository", {}).get("full_name", "Unknown Repo")

@@ -1,6 +1,6 @@
 services:
   webhook:
-    image: tele-notif:2  # built locally, or you can use a remote registry
+    image: tele-notif:latest # built locally, or you can use a remote registry
     container_name: webhook-bot
     ports:
       - "8081:8000"
