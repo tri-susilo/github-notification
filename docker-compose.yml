@@ -1,6 +1,6 @@
 services:
   webhook-bot:
-    image: ghcr.io/tri-susilo/tele-notif:latest  
+    image: ghcr.io/tri-susilo/github-notification:latest
     container_name: webhook-bot
     restart: unless-stopped
     ports:

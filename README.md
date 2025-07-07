@@ -93,12 +93,12 @@ docker-compose up -d
 
 ## ☁️ Deploy via GHCR
 
-- Image available at: `ghcr.io/<username>/<repository>:<tag>`
+- Image available at: `ghcr.io/tri-susilo/github-notification:latest`
 - Example pull & run:
 
 ```bash
-docker pull ghcr.io/tri-susilo/tele-notif:latest
-docker run -d -p 8000:8000 --env-file .env ghcr.io/tri-susilo/tele-notif:latest
+docker pull ghcr.io/tri-susilo/github-notification:latest
+docker run -d -p 8000:8000 --env-file .env ghcr.io/tri-susilo/github-notification:latest
 ```
 
 ---
