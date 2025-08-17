@@ -141,16 +141,3 @@ MIT License – Free to use, modify, and distribute.
 
 Developed by [Tri Susilo](https://github.com/tri-susilo).  
 Contributions & feedback welcome via pull requests or issues.
-
-flowchart TD
-    A[Internet] --> B[Cloudflare Proxy]
-    B --> C[EC2 VPN Gateway]
-    C -->|WireGuard| D[Swarm Manager 10.10.0.2]
-    C -->|WireGuard| E[Swarm Worker 10.10.0.3]
-    C -->|WireGuard| F[Swarm Worker 10.10.0.4]
-    
-    D --> G[Traefik Reverse Proxy]
-    D --> H[Portainer]
-    D --- I[MicroCeph Storage]
-    E --- I
-    F --- I
